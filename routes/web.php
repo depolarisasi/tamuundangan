@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TamuController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\SettingController;
+use Barryvdh\DomPDF\Facade\Pdf;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,14 +20,18 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('undangan/{uniquecode?}', [PageController::class, 'undangan']);
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+Route::get('mempelai/tamu', [TamuController::class, 'index']);
+Route::post('mempelai/tamu', [TamuController::class, 'store']);
+Route::get('mempelai/tamu/edit/{id}', [TamuController::class, 'edit']);
+Route::put('mempelai/tamu/{id}', [TamuController::class, 'update']);
+Route::get('mempelai/tamu/delete/{id}', [TamuController::class, 'destroy']);
+
+
+Route::get('mempelai/setting', [SettingController::class, 'index']);
+Route::post('mempelai/setting', [SettingController::class, 'store']);
+Route::get('mempelai/setting/{id}', [SettingController::class, 'edit']);
+Route::put('mempelai/setting/{id}', [SettingController::class, 'update']);
 
 require __DIR__.'/auth.php';

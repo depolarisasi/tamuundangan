@@ -13,25 +13,25 @@ class Tamu extends Model
     *
     * @var string
     */
-   protected $table = 'ucapan';
+   protected $table = 'tamu';
 
    /**
     * The database primary key value.
     *
     * @var string
     */
-   protected $primaryKey = 'ucapan_id';
+   protected $primaryKey = 'tamu_id';
 
    /**
     * Attributes that should be mass-assignable.
     * @var array
     */
-   protected $fillable = ['ucapan_nama',
-   'ucapan_organisasi',
-   'ucapan_keluarga',
-   'ucapan_nohp',
-   'ucapan_uniquecode',
-   'ucapan_qr',
+   protected $fillable = ['tamu_nama',
+   'tamu_organisasi',
+   'tamu_keluarga',
+   'tamu_nohp',
+   'tamu_uniquecode',
+   'tamu_qr',
    'created_at',
    'updated_at'];
 }

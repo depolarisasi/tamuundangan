@@ -3,181 +3,89 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Tamu;
+use Illuminate\Database\QueryException;
 
 class TamuController extends Controller
 {
-     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $article = article::join('users','users.id', '=','articles.penulis')
-            ->select('articles.*','users.name','users.kode_faskes')->get();
+        // Fungsi untuk menampilkan semua data tamu
+        public function index()
+        {
+            $tamus = Tamu::all();
+            $count_tamu_pria = Tamu::where('tamu_keluarga','Tamu Mempelai Pria')->count();
+            $count_tamu_wanita = Tamu::where('tamu_keluarga','Tamu Mempelai Wanita')->count();
+            $count_tamu_keluarga_pria = Tamu::where('tamu_keluarga','Tamu Keluarga Pria')->count();
+            $count_tamu_keluarga_wanita = Tamu::where('tamu_keluarga','Tamu Keluarga Wanita')->count();
+            return view('tamu.index')->with(compact('tamus','count_tamu_pria','count_tamu_wanita','count_tamu_keluarga_pria','count_tamu_keluarga_wanita'));
+        }
 
-            return view('article.semuaarticle',compact('article'));
-    }
+        // Fungsi untuk menyimpan data tamu baru
+        public function store(Request $request)
+        {
+            $request->validate([
+                'tamu_nama' => 'required|string|max:255',
+                'tamu_organisasi' => 'nullable|string|max:255',
+                'tamu_keluarga' => 'nullable|string|max:255',
+                'tamu_nohp' => 'required|string|max:15',
+            ]);
+            $uniquecode = str_pad(mt_rand(0, 999999999), 9, '0', STR_PAD_LEFT);
+            $form_data = collect($request->all());
+            $form_data->put('tamu_uniquecode',$uniquecode);
+            $form_data->put('tamu_qr','undangan/'.$uniquecode);
 
-
-    public function new(){
-        return view('article.articlebaru');
-
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-
-        $requestz = collect($request);
-        $requestz->put('penulis', Auth::user()->id);
-        $requestz->put('tanggal', date('Y-m-d'));
-        $requestz->put('slug', Str::slug(substr($request['blogjudul'], 0, 50).'-'.substr(md5(microtime()), rand(0, 26), 5)));
-
-        if ($request->file('thumb') == '') {
-            $requestz->put('foto', 'img/blogimg.png');
-            $requestz->put('thumbnailFoto', 'img/blog-thumb.png');
-        } else {
-            $file = $request->file('thumb');
-            $fileArray = ['image' => $file];
-            $rules = ['image' => 'mimes:jpeg,jpg,png,gif|required|max:1000000'];
-            $validator = Validator::make($fileArray, $rules);
-            if ($validator->fails()) {
-                // Redirect or return json to frontend with a helpful message to inform the user
-                // that the provided file was not an adequate type
-                $err = '<strong>File yang di upload bukanlah gambar, atau ukuran gambar kamu melebihi batas upload</strong>';
-
-
-                return redirect()->back();
-            } else {
-                // Store the File Now
-                // read image from temporary file
-                $fileName1 = time().'.'.$file->getClientOriginalName();
-                $fileName2 = time().'.thumb.'.$file->getClientOriginalName();
-                Image::make($file)->save('img/'.$fileName1);
-                Image::make($file)->fit(800, 350)->save('img/'.$fileName2);
-                $requestz->put('foto', 'img/'.$fileName1);
-                $requestz->put('thumbnailFoto', 'img/'.$fileName2);
+            try {
+                $tamu = Tamu::create($form_data->all());
+            alert('Sukses','Data Berhasil Ditambahkan', 'success');
+            return redirect('mempelai/tamu');
+            } catch (QueryException $e) {
+            alert('Gagal','Data Gagal Ditambahkan', 'error');
+            return redirect('mempelai/tamu');
             }
         }
 
-        $requestData = $requestz->all();
-
-        try {
-            article::create($requestData);
-        } catch (\Illuminate\Database\QueryException $e) {
-            return $e;
+        // Fungsi untuk menampilkan data tamu berdasarkan ID
+        public function edit($id)
+        {
+            $tamu = Tamu::findOrFail($id);
+            return view('tamu.edit',compact('tamu'));
         }
 
-        notify()->success('Berhasil! Post sudah diterbitkan!');
+        // Fungsi untuk memperbarui data tamu berdasarkan ID
+        public function update(Request $request, $id)
+        {
+            $tamu = Tamu::findOrFail($id);
 
-        return redirect('artikel');
+            $request->validate([
+                'tamu_nama' => 'required|required|string|max:255',
+                'tamu_organisasi' => 'nullable|string|max:255',
+                'tamu_keluarga' => 'nullable|string|max:255',
+                'tamu_nohp' => 'required|required|string|max:15',
 
+            ]);
 
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function show(int $id)
-    {
-        $detail = article::find($id);
-        return view('article.detailarticle')->with(compact('detail'));
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(int $id)
-    {
-        $detail = article::find($id);
-        return view('article.ubaharticle')->with(compact('detail'));
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-
-    {
-        $edit = article::find($request->id);
-        $requestz = collect($request);
-        $requestz->put('slug', Str::slug(substr($request['blogjudul'], 0, 50).'-'.substr(md5(microtime()), rand(0, 26), 5)));
-
-        if ($request->file('thumb') == '') {
-            $requestz->put('foto', 'img/blogimg.png');
-            $requestz->put('thumbnailFoto', 'img/blog-thumb.png');
-        } else {
-            $file = $request->file('thumb');
-            $fileArray = ['image' => $file];
-            $rules = ['image' => 'mimes:jpeg,jpg,png,gif|required|max:1000000'];
-            $validator = Validator::make($fileArray, $rules);
-            if ($validator->fails()) {
-                // Redirect or return json to frontend with a helpful message to inform the user
-                // that the provided file was not an adequate type
-                $err = '<strong>File yang di upload bukanlah gambar, atau ukuran gambar kamu melebihi batas upload</strong>';
-
-                notify()->warning('Oh No ! File yang di upload bukanlah gambar, atau ukuran gambar anda melebihi batas upload', 'warning');
-
-                return redirect()->back();
-            } else {
-                // Store the File Now
-                // read image from temporary file
-                $fileName1 = time().'.'.$file->getClientOriginalName();
-                $fileName2 = time().'.thumb.'.$file->getClientOriginalName();
-                Image::make($file)->save('img/'.$fileName1);
-                Image::make($file)->fit(800, 350)->save('img/'.$fileName2);
-                $requestz->put('foto', 'img/'.$fileName1);
-                $requestz->put('thumbnailFoto', 'img/'.$fileName2);
+            try {
+                $tamu->update($request->all());
+                alert('Sukses','Data Berhasil Diubah', 'success');
+            return redirect('mempelai/tamu');
+            } catch (QueryException $e) {
+                alert('Gagal','Data Gagal Diubah', 'error');
+                return redirect('mempelai/tamu');
             }
         }
 
-        $requestData = $requestz->all();
+        // Fungsi untuk menghapus data tamu berdasarkan ID
+        public function destroy($id)
+        {
+            $tamu = Tamu::findOrFail($id);
+            try {
+                $tamu->delete();
+            alert('Sukses','Data Berhasil Dihapus', 'success');
+            return redirect('mempelai/tamu');
+            } catch (QueryException $e) {
+            alert('Gagal','Data Gagal Dihapus', 'error');
+            return redirect('mempelai/tamu');
+            }
 
-        try {
-           $edit->update($requestData);
-        } catch (\Illuminate\Database\QueryException $e) {
-            return $e;
         }
 
-        notify()->success('Berhasil! Post sudah diubah!');
-
-        return redirect('artikel');
-
-
-    }
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(int $id)
-    {
-        $article = article::find($id);
-
-        try{
-            $article->delete();
-        }catch(QE $e){  return $e; } //show db error message
-
-        notify()->success('Berhasil ! Article berhasil dihapus');
-            return redirect('artikel');
-    }
 }
