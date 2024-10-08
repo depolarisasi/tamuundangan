@@ -13,6 +13,7 @@ class PageController extends Controller
         // Daftar pengaturan yang akan digunakan untuk mengganti placeholder
         $settings = [
             'wedding_name' => config('settings.wedding_name'),
+            'wedding_day' => config('settings.resepsi_day'),
             'wedding_date' => config('settings.wedding_date'),
             'akad_place' => config('settings.akad_place'),
             'akad_date' => config('settings.akad_date'),
