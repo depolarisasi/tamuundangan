@@ -16,38 +16,25 @@
 <meta property="og:url" content="{{url('/')}}" />
 <meta property="og:title" content="{{config('settings.wedding_name')}}" />
 <meta property="og:description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.wedding_day')}}, {{config('settings.resepsi_date')}}" />
-<meta property="og:image" content="images/og-image.png" />
+<meta property="og:image" content="{{asset('images/og-image.png"')}}" />
 <meta property="og:locale" content="in_ID">
 
-<meta property="twitter:card" content="images/og-image.png">
+<meta property="twitter:card" content="images/og-image.png')}}">
 <meta property="twitter:url" content="{{url('/')}}">
 <meta property="twitter:title" content="{{config('settings.wedding_name')}}">
 <meta property="twitter:description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.wedding_day')}}, {{config('settings.resepsi_date')}}">
-<meta property="twitter:image" content="images/og-image.png">
+<meta property="twitter:image" content="{{asset('images/og-image.png')}}">
 
 
-<script src="wedding/jquery.js"></script>
 <title>{{config('settings.wedding_name')}} | United By Love</title>
-<link rel="icon" href="media/kat/favicon.png">
-
-<link rel="stylesheet" href="wedding/plugin/selectize/dist/css/selectize.default.css">
-<link rel="stylesheet" href="wedding/plugin/flexbin/flexbin.css" media="all">
-<link rel="stylesheet" href="wedding/plugin/aos/dist/aos.css">
-<link rel="stylesheet" href="wedding/plugin/lightgallery/dist/css/lightgallery.css">
-<link rel="stylesheet" href="wedding/plugin/fontawesome/css/all.css">
-<link rel="stylesheet" href="wedding/plugin/slick/slick.css">
-<link rel="stylesheet" href="wedding/plugin/modal-video/css/modal-video.min.css">
-
+<link rel="icon" href="{{asset('media/kat/favicon.png')}}">
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
+<link rel="stylesheet" href="{{asset('wedding/style.css')}}">
+<link rel="stylesheet" href="{{asset('wedding/plugin.css')}}">
+<script src="{{asset('wedding/jquery.js')}}"></script>
 
-<link rel="stylesheet" href="wedding/universal.css">
-<link rel="stylesheet" href="wedding/template/global.css">
-<link rel="stylesheet" href="wedding/template/exclusive-helga.css">
 </head>
 <body class="helga original preset-original custom-fonts" data-template="helga">
-
-
-
 <section class="kat-page__side-to-side">
 
 <section class="primary-pane">
@@ -248,7 +235,7 @@
 </div>
 <div class="couple-details">
 <h2 class="couple-name" data-aos="fade-up" data-aos-duration="1000">{{config('settings.mempelai_pria_long')}}</h1> <p class="couple-parents" data-aos="fade-up" data-aos-duration="1000">Putra Dari Bapak {{config('settings.ayah_pria')}} dan Ibu {{config('settings.ibu_pria')}}</p> <div class="couple-link-wrap" data-aos="fade-up" data-aos-duration="1000">
-<a href="https://www.instagram.com/{{config('settings.username_ig_pria')}}" target="_blank" class="couple-link"><i class="fab fa-instagram"></i> @{{config('settings.username_ig_pria')}}</a>
+<a href="https://www.instagram.com/{{config('settings.username_ig_pria')}}" target="_blank" class="couple-link"><i class="fab fa-instagram"></i> @ {{config('settings.username_ig_pria')}}</a>
 </div> </div>
 </div>
 <div class="separator-wrap">
@@ -273,7 +260,7 @@
 </div>
 <div class="couple-details">
 <h2 class="couple-name" data-aos="fade-up" data-aos-duration="1000">{{config('settings.mempelai_wanita_long')}}</h2> <p class="couple-parents" data-aos="fade-up" data-aos-duration="1000">Putri dari Bapak {{config('settings.ayah_wanita')}} dan Ibu {{config('settings.ibu_wanita')}}</p> <div class="couple-link-wrap" data-aos="fade-up" data-aos-duration="1000">
-<a href="https://www.instagram.com/{{config('settings.username_ig_wanita')}}" target="_blank" class="couple-link"><i class="fab fa-instagram"></i> @{{config('settings.username_ig_wanita')}}</a>
+<a href="https://www.instagram.com/{{config('settings.username_ig_wanita')}}" target="_blank" class="couple-link"><i class="fab fa-instagram"></i> @ {{config('settings.username_ig_wanita')}}</a>
 </div> </div>
 </div>
 </div>
@@ -316,7 +303,7 @@
 </div>
 </div>
 <div class="add-to-calendar-wrap" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1100">
-<a class="add-to-calendar" href="https://www.google.com/calendar/render?action=TEMPLATE&amp;text={{config('settings.mempelai_wanita_short')}}+%26+{{config('settings.mempelai_pria_short')}}+Wedding+Wedding&amp;dates=20240623T110000/20240623T140000&amp;location=Taman+Kupu-Kupu+%7C+Jl.+Cihanjuang+Cibaligo+Permai+Raya+No.58%2C+Cihanjuang%2C+Kec.+Parongpong%2C+Kabupaten+Bandung+Barat%2C+Jawa+Barat+40559%2C+Indonesia+%7C+Kabupaten+Bandung+Barat&amp;details=Hai%2C+Kamu+diundang+pada+acara+pesta+pernikahan+kami+%7C+Pernikahan+{{config('settings.mempelai_wanita_short')}}+%26+{{config('settings.mempelai_pria_short')}}+Wedding+%7C+{{config('settings.wedding_day')}}%2C+23+Juni+2024" target="_blank" rel="nofollow" id="addToCalendar">
+<a class="add-to-calendar" href="https://www.google.com/calendar/render?action=TEMPLATE&amp;text={{config('settings.mempelai_wanita_short')}}+%26+{{config('settings.mempelai_pria_short')}}+Wedding&amp;dates=20241109T110000/20241109T140000&amp;location=Hotel+Sari+Ater+Kamboti+%7C+Jl.+Lemahnendeut+No.7%2C+Sukawarna%2C+Kec.+Sukajadi%2C+Kota+Bandung%2C+Jawa+Barat+40164%2C+Indonesia+%7C+Kota+Bandung&amp;details=Anda+diundang+pada+acara+pesta+pernikahan+kami+%7C+Pernikahan+{{config('settings.mempelai_wanita_short')}}+%26+{{config('settings.mempelai_pria_short')}}+{{config('settings.wedding_day')}}%2C+09+November+2024" target="_blank" rel="nofollow" id="addToCalendar">
 Tambah ke Kalender </a>
 </div>
 </div>
@@ -325,12 +312,13 @@ Tambah ke Kalender </a>
 <section class="agenda-wrap">
 <div class="agenda-inner">
 <div class="agenda-head">
-<h1 class="agenda-title" data-aos="zoom-in" data-aos-duration="1500">Pelaksanaan Hari Bahagia</h1> <p class="agenda-description" data-aos="fade-up" data-aos-duration="1200">#{{config('settings.mempelai_wanita_short')}}And{{config('settings.mempelai_pria_short')}}</p> </div>
+<h1 class="agenda-title" data-aos="zoom-in" data-aos-duration="1500">Pelaksanaan Hari Bahagia</h1>
+<p class="agenda-description" data-aos="fade-up" data-aos-duration="1200">#{{config('settings.mempelai_wanita_short')}}And{{config('settings.mempelai_pria_short')}}</p> </div>
 <div class="agenda-body">
 <div class="event-item" data-aos="fade-up" data-aos-duration="1200">
 <div class="event-head">
-<h1 class="event-day" data-aos="fade-up" data-aos-duration="1000">{{config('settings.wedding_day')}},</h1>
-<p class="event-date" data-aos="fade-up" data-aos-duration="1000">{{config('settings.resepsi_date')}}</p>
+{{-- <h1 class="event-day" data-aos="fade-up" data-aos-duration="1000">{{config('settings.resepsi_day')}}, {{config('settings.resepsi_date')}}</h1> --}}
+{{-- <p class="event-date" data-aos="fade-up" data-aos-duration="1000">{{config('settings.resepsi_day')}}, {{config('settings.resepsi_place')}}</p> --}}
 </div>
 <div class="event-content"><div class="activity-wrap "><div class="activity-item">
 <div class="activity-head">
@@ -345,7 +333,7 @@ Tambah ke Kalender </a>
 <path d="M477.463 66.9405C473.293 63.3221 466.976 63.7665 463.357 67.9378L444.67 89.467C441.049 93.6374 441.497 99.9527 445.667 103.573C446.227 104.059 446.824 104.47 447.45 104.81C451.484 107.006 456.639 106.186 459.773 102.576L478.46 81.0463C482.081 76.8759 481.633 70.5602 477.463 66.9405Z" fill="black" />
 </svg>
 <h1 class="activity-title" data-aos="fade-up" data-aos-duration="1000">Resepsi Pernikahan</h1>
-<p class="activity-time" data-aos="fade-up" data-aos-duration="1000">11:00 - 14:00</p>
+<p class="activity-time" data-aos="fade-up" data-aos-duration="1000">{{config('settings.resepsi_day')}}, {{config('settings.resepsi_date')}} - {{config('settings.resepsi_time')}}</p>
 </div><div class="activity-details">
 <p class="activity-hall" data-aos="fade-up" data-aos-duration="1000">{{config('settings.resepsi_place')}}</p>
 <p class="activity-address" data-aos="fade-up" data-aos-duration="1000">{{config('settings.resepsi_address')}}</p>
@@ -397,6 +385,9 @@ Tambah ke Kalender </a>
 <p class="info-date" data-aos="fade-up" data-aos-duration="1000">{{config('settings.resepsi_confirmation')}}</p> </div>
 </div>
 <div class="rsvp-body">
+    <form method="post" action="">
+
+    </form>
 </div>
 </div>
 </section>
@@ -540,48 +531,41 @@ Tambah ke Kalender </a>
 </div>
 <div class="wedding-gift-body">
 <div class="wedding-gift-form">
-<form action method="POST" id="weddingGiftForm">
-
 <div class="wedding-gift-details wedding-gift__first-slide wedding-gift-slide">
 
 <div class="wedding-gift-select-bank-wrap">
-<label>Pilih bank tujuan transfer</label>
-<select name="select_bank" id="selectBank" class="form-control"></select>
+<div class="bank-item">
+    <div class="bank-detail">
+    <small class="bank-account-name-label">Nama Bank</small>
+    <h3 class="bank-name">Mandiri {{config('settings.hadiah_bank1')}}</h3>
+    <div>
+    <small class="bank-account-number-label">No. Rekening</small>
+    <h4 class="bank-account-number">123123213213{{config('settings.hadiah_norek1')}}</h4>
+    </div>
+    <div>
+    <small class="bank-account-name-label">Pemilik Rekening</small>
+    <h4 class="bank-account-name">BABABABA{{config('settings.hadiah_rek1')}}</h4>
+    </div>
+    </div>
+    </div>
+    <hr>
+    <div class="bank-item">
+    <div class="bank-detail">
+        <small class="bank-account-name-label">Nama Bank</small>
+    <h3 class="bank-name">BCA {{config('settings.hadiah_bank2')}}</h3>
+    <div>
+    <small class="bank-account-number-label">No. Rekening</small>
+    <h4 class="bank-account-number">{{config('settings.hadiah_norek2')}}</h4>
+    </div>
+    <div>
+    <small class="bank-account-name-label">Pemilik Rekening</small>
+    <h4 class="bank-account-name">{{config('settings.hadiah_rek2')}}</h4>
+    </div>
+    </div>
+    </div>
 </div>
 
-<div class="wedding-gift-bank-wrap">
-<div class="bank-item" id="savingBook6993">
-<div class="bank-detail">
-<h3 class="bank-name">{{config('settings.hadiah_bank1')}}</h3>
-<div>
-<small class="bank-account-number-label">No. Rekening</small>
-<h4 class="bank-account-number" data-copy="{{config('settings.hadiah_norek1')}}">{{config('settings.hadiah_norek1')}} <i class="fas fa-clone fa-flip-horizontal"></i></h4>
 </div>
-<div>
-<small class="bank-account-name-label">Pemilik Rekening</small>
-<h4 class="bank-account-name">{{config('settings.hadiah_rek1')}}</h4>
-</div>
-</div>
-<div class="bank-img-wrap lightgallery">
-<a href="media/public/28796/22848/book/thumb_lg_246428_1700841779_1200_1200.jpg" class="bank-img-link">
-<img class="bank-img" src="media/public/28796/22848/book/thumb_md_246428_1700841779_600_600.jpg" alt="{{config('settings.hadiah_rek1')}}">
-</a>
-</div>
-</div><div class="bank-item" id="savingBook8386">
-<div class="bank-detail">
-<h3 class="bank-name">{{config('settings.hadiah_bank2')}}</h3>
-<div>
-<small class="bank-account-number-label">No. Rekening</small>
-<h4 class="bank-account-number" data-copy="{{config('settings.hadiah_norek2')}}">{{config('settings.hadiah_norek2')}} <i class="fas fa-clone fa-flip-horizontal"></i></h4>
-</div>
-<div>
-<small class="bank-account-name-label">Pemilik Rekening</small>
-<h4 class="bank-account-name">{{config('settings.hadiah_rek2')}}</h4>
-</div>
-</div>
-</div> </div>
-</div>
-</form>
 </div>
 </div>
 </div>
@@ -634,6 +618,8 @@ Tambah ke Kalender </a>
 </div>
 </section>
 
+
+@if($tamu)
 <section class="wedding-wish-wrap" data-template>
 <div class="wedding-wish-inner">
 <div class="wedding-wish-head">
@@ -641,17 +627,16 @@ Tambah ke Kalender </a>
 <p class="wedding-wish-description" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">Ucapan &amp; Doa dari Anda akan sangat berarti bagi kami</p> </div>
 <div class="wedding-wish-body">
 <div class="wedding-wish-form">
-<form action class method="POST" id="weddingWishForm">
+<form action="{{url('kirimucapan')}}" method="get">
+@csrf
 <div>
-<input type="hidden" name="guestId" value="1784940">
-<input type="hidden" name="code" value="972347">
-<input type="hidden" name="post" value="newComment">
+<input type="hidden" name="uniquecode" value="{{$tamu->tamu_uniquecode}}">
 </div>
-<div class="form-group guest-name-wrap  hide " data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
-<input type="text" name="name" class="form-control guest-name" placeholder="Nama" value="Vini Novianti - STBA">
+<div class="form-group guest-name-wrap  " data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+<input type="text" name="name" class="form-control guest-name" value="{{$tamu->tamu_nama}} - {{$tamu->tamu_organisasi}}" disabled>
 </div>
 <div class="form-group guest-comment-wrap" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
-<textarea class="form-control guest-comment" name="comment" rows="1" placeholder="Berikan ucapan"></textarea>
+<textarea class="form-control" name="comment" rows="1" placeholder="Tulis ucapan anda"></textarea>
 </div>
 <div class="submit-comment-wrap" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
 <button type="submit" class="submit submit-comment" data-last>Kirim</button>
@@ -667,6 +652,7 @@ Tambah ke Kalender </a>
 </div>
 </div>
 </section>
+@endif
 
 <section class="footnote-wrap">
 <div class="ornaments-wrapper">
@@ -796,22 +782,13 @@ Tambah ke Kalender </a>
 
     // Music
     var MUSIC = {
-        'url': "https://katsudoto-storage.sgp1.vultrobjects.com/media/public/28796/22848/assets/jake20miller2020lucky20me20the20proposal-1714495038-e7deda7eac82888707260d26.mp3",
+        'url': "{{asset('wedding/lagu.mp3')}}",
         'box': '#music-box'
     };
 
     // Event
-    var EVENT = 1719115200;
+    var EVENT = 1731150000;
 
-    // Banks
-    var BANK_OPTIONS = [{"id":6993,"title":"BANK MANDIRI","credential":"0700010318462"},{"id":8386,"title":"BANK MANDIRI","credential":"1300004100015"}];
-
-    // RSVP
-    var RSVP = {
-        'button_text': {
-            'attend': "Hadir",
-            'not_attend': "Tidak Hadir"        }
-    };
 
     // Covers
     var COVERS = [
@@ -851,22 +828,6 @@ Tambah ke Kalender </a>
         'dots': '#protocol-dots'
     };
 
-    // RSVP Data
-    var RSVP_DATA = {
-        post: 'rsvp_request',
-        request: 'get_rsvp',
-        content: '',
-        template: 'default_v2_rsvp',
-        changeButton: '#changeRSVP',
-        amountElement: '#rsvpAmountWrap'
-    }
-
-    var KADO_DATA = {
-        post: 'post_kado_data',
-        request: 'getKado',
-        content: '',
-        template: ''
-    }
 
 </script>
 
@@ -876,13 +837,6 @@ Tambah ke Kalender </a>
 </div>
 
 <div id="modal" class="modal modal-center"></div>
-
-<script src="wedding/plugin/aos/dist/aos.js"></script>
-<script src="wedding/plugin/slick/slick.min.js"></script>
-<script src="wedding/plugin/selectize/dist/js/standalone/selectize.min.js"></script>
-<script src="wedding/plugin/modal-video/js/jquery-modal-video.min.js"></script>
-<script src="wedding/plugin/lightgallery/dist/js/lightgallery.min.js"></script>
-<script src="wedding/universal.js"></script>
-<script src="wedding/template/template.js"></script>
-<script src="wedding/template/js/exclusive-helga.js"></script>
+<script src="{{asset('wedding/plugin.js')}}"></script>
+<script src="{{asset('wedding/wedding.js')}}"></script>
 </html>

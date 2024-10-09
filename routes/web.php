@@ -17,9 +17,9 @@ use Barryvdh\DomPDF\Facade\Pdf;
 */
 
 
-Route::get('{uniquecode?}', [PageController::class, 'index']);
-Route::get('undangan/{uniquecode?}', [PageController::class, 'undangan']);
-Route::get('mempelai', [PageController::class, 'dashboard']);
+Route::get('/', [PageController::class, 'index']);
+Route::get('/undangan/{uniquecode?}', [PageController::class, 'undangan']);
+Route::get('/mempelai', [PageController::class, 'dashboard'])->middleware('auth');
 
 Route::get('mempelai/tamu', [TamuController::class, 'index']);
 Route::post('mempelai/tamu', [TamuController::class, 'store']);
@@ -32,5 +32,6 @@ Route::get('mempelai/setting', [SettingController::class, 'index']);
 Route::post('mempelai/setting', [SettingController::class, 'store']);
 Route::get('mempelai/setting/{id}', [SettingController::class, 'edit']);
 Route::put('mempelai/setting/{id}', [SettingController::class, 'update']);
+
 
 require __DIR__.'/auth.php';

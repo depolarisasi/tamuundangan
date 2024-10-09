@@ -31,9 +31,9 @@ class PageController extends Controller
         return $template;
     }
 
-    public function index($uniquecode = null){
-        if($uniquecode){
-            $tamu = Tamu::where('tamu_uniquecode',$uniquecode)->first();
+    public function index(Request $request){
+        if($request->get('guest')){
+            $tamu = Tamu::where('tamu_uniquecode',$request->get('guest'))->first();
          }else {
             $tamu = "";
          }
