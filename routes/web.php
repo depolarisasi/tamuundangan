@@ -16,11 +16,10 @@ use Barryvdh\DomPDF\Facade\Pdf;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
 
+Route::get('{uniquecode?}', [PageController::class, 'index']);
 Route::get('undangan/{uniquecode?}', [PageController::class, 'undangan']);
+Route::get('mempelai', [PageController::class, 'dashboard']);
 
 Route::get('mempelai/tamu', [TamuController::class, 'index']);
 Route::post('mempelai/tamu', [TamuController::class, 'store']);

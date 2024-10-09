@@ -31,7 +31,21 @@ class PageController extends Controller
         return $template;
     }
 
-    public function undangan($uniquecode){
+    public function index($uniquecode = null){
+        if($uniquecode){
+            $tamu = Tamu::where('tamu_uniquecode',$uniquecode)->first();
+         }else {
+            $tamu = "";
+         }
+        return view('index',compact('tamu'));
+    }
+
+    public function dashboard(){
+        return view('dashboard');
+    }
+
+
+    public function undangan($uniquecode = null){
          // Ambil template undangan dari pengaturan
          if($uniquecode){
             $nama_tamu = Tamu::where('tamu_uniquecode',$uniquecode)->first();
