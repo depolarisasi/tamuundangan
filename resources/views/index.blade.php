@@ -24,7 +24,10 @@
 <meta property="twitter:title" content="{{config('settings.wedding_name')}}">
 <meta property="twitter:description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.wedding_day')}}, {{config('settings.resepsi_date')}}">
 <meta property="twitter:image" content="{{asset('images/og-image.png')}}">
-
+@livewireStyles
+@if($tamu)
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endif
 
 <title>{{config('settings.wedding_name')}} | United By Love</title>
 <link rel="icon" href="{{asset('media/kat/favicon.png')}}">
@@ -32,7 +35,7 @@
 <link rel="stylesheet" href="{{asset('wedding/style.css')}}">
 <link rel="stylesheet" href="{{asset('wedding/plugin.css')}}">
 <script src="{{asset('wedding/jquery.js')}}"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body class="helga original preset-original custom-fonts" data-template="helga">
 <section class="kat-page__side-to-side">
@@ -376,6 +379,7 @@ Tambah ke Kalender </a>
 </div>
 </section>
 
+@if($tamu)
 <section class="rsvp-wrap" id="rsvp">
 <div class="rsvp-inner">
 <div class="rsvp-head">
@@ -385,12 +389,21 @@ Tambah ke Kalender </a>
 <p class="info-date" data-aos="fade-up" data-aos-duration="1000">{{config('settings.resepsi_confirmation')}}</p> </div>
 </div>
 <div class="rsvp-body">
-    <form method="post" action="">
+    <form id="confirmationForm">
+    <input type="hidden" name="guestId" id="guestId" value="{{$tamu->tamu_uniquecode}}">
+    <select id="kehadiran" name="kehadiran" class="form-control">
+        <option value="Ya akan hadir">Saya akan hadir</option>
+        <option value="Tidak akan hadir">Saya tidak akan hadir</option>
+        <option value="Belum menentukan">Saya Belum menentukan</option>
+      </select>
 
+    <button type="submit" class="btn-submit btn btn-md btn-primary" style="margin-top: 10px !important;" id="submitButton">Konfirmasi</button>
+    <span id="loadingAnimation" style="display:none;" class="loading"></span>
     </form>
 </div>
 </div>
 </section>
+@endif
 
 <section class="gallery-wrap">
 <div class="ornaments-wrapper">
@@ -620,34 +633,43 @@ Tambah ke Kalender </a>
 
 
 @if($tamu)
+
 <section class="wedding-wish-wrap" data-template>
 <div class="wedding-wish-inner">
 <div class="wedding-wish-head">
 <h1 class="wedding-wish-title" data-aos="fade-up" data-aos-duration="1200">Ucapan &amp; Harapan</h1>
-<p class="wedding-wish-description" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">Ucapan &amp; Doa dari Anda akan sangat berarti bagi kami</p> </div>
+<p class="wedding-wish-description" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">Ucapan &amp; Doa dari Anda akan sangat berarti bagi kami</p>
+</div>
 <div class="wedding-wish-body">
-<div class="wedding-wish-form">
-<form action="{{url('kirimucapan')}}" method="get">
-@csrf
-<div>
-<input type="hidden" name="uniquecode" value="{{$tamu->tamu_uniquecode}}">
-</div>
-<div class="form-group guest-name-wrap  " data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
-<input type="text" name="name" class="form-control guest-name" value="{{$tamu->tamu_nama}} - {{$tamu->tamu_organisasi}}" disabled>
-</div>
-<div class="form-group guest-comment-wrap" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
-<textarea class="form-control" name="comment" rows="1" placeholder="Tulis ucapan anda"></textarea>
-</div>
-<div class="submit-comment-wrap" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
-<button type="submit" class="submit submit-comment" data-last>Kirim</button>
-</div>
-</form>
-</div>
-<div class="comment-wrap">
 
-</div>
-<div class="more-comment-wrap" data-aos="fade-up" data-aos-duration="1200">
-<button type="button" id="moreComment" data-template data-start="0" data-load-text="Memuat">Lebih banyak komentar</button>
+
+    <!-- Form Section -->
+    <div class="wedding-wish-form">
+        <form id="weddingWishesForm">
+            <div>
+                <input type="hidden" name="tamu_uniquecode" id="tamu_uniquecode" value="{{ $tamu->tamu_uniquecode }}">
+            </div>
+
+            <div class="form-group guest-name-wrap" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+                <input type="text" name="name" class="form-control guest-name" value="{{ $tamu->tamu_nama }} - {{ $tamu->tamu_organisasi }}" disabled>
+            </div>
+
+            <div class="form-group guest-comment-wrap" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
+                <textarea class="form-control" id="wishes" name="wishes" rows="1" placeholder="Tulis ucapan anda"></textarea>
+            </div>
+
+            <div class="submit-comment-wrap" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
+                <button type="submit" class="btn btn-md btn-primary" id="submitComment" data-last>Kirim</button>
+            </div>
+        </form>
+    </div>
+
+   <!-- Section to display the list of wishes -->
+   <div class="comment-wrap">
+    <h3>Ucapan Pernikahan</h3>
+    <ul id="weddingWishesList">
+        <!-- Wishes will be dynamically inserted here -->
+    </ul>
 </div>
 </div>
 </div>
@@ -778,6 +800,9 @@ Tambah ke Kalender </a>
 <section class="music-outer" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
 <div class="music-box auto" id="music-box"></div>
 </section>
+
+@livewireScripts
+</body>
 <script>
 
     // Music
@@ -831,6 +856,117 @@ Tambah ke Kalender </a>
 
 </script>
 
+<script>
+    // JavaScript Code
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+
+    $(document).ready(function() {
+      $('#confirmationForm').on('submit', function(e) {
+        e.preventDefault(); // Prevent form from submitting the traditional way
+
+        var kehadiran = $('#kehadiran').val(); // Get the selected option
+        var guestId = $('#guestId').val(); // Get the selected option
+        var submitButton = $('#submitButton');
+        var loadingAnimation = $('#loadingAnimation');
+
+        // Disable the button and show the loading animation
+        submitButton.prop('disabled', true);
+        loadingAnimation.show();
+
+        // AJAX POST request
+
+        $.ajax({
+          type: 'POST',
+          url: '/konfirmasi-kehadiran',
+          data: { guestId: guestId,
+             kehadiran: kehadiran },
+          success: function(response) {
+            // Check if the response is a success
+            swal("Terima Kasih", "Terima kasih telah mengkonfirmasi kehadiran anda!", "success");
+          },
+          error: function(xhr, status, error) {
+            // Handle error if the request fails
+            swal("Mohon Maaf", "Mohon maaf, terjadi kesalahan silahkan coba lagi nanti", "success");
+          },
+          complete: function() {
+            // Enable the button and hide the loading animation after the request completes
+            submitButton.prop('disabled', false);
+            loadingAnimation.hide();
+          }
+        });
+      });
+    });
+  </script>
+<script>
+$(document).ready(function() {
+    // Load all existing wedding wishes when the page loads
+    loadWishes();
+
+    // AJAX form submission
+    $('#weddingWishesForm').on('submit', function(e) {
+        e.preventDefault(); // Prevent the form from submitting the traditional way
+
+        var tamu_uniquecode = $('#tamu_uniquecode').val();
+        var wishes = $('#wishes').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/submit-wedding-wish', // Laravel route to handle the form submission
+            data: {
+                tamu_uniquecode: tamu_uniquecode,
+                wishes: wishes,
+                _token: '{{ csrf_token() }}' // CSRF token for security
+            },
+            success: function(response) {
+                // If the wish is successfully saved, reload the wishes
+                $('#wishes').val(''); // Clear the textarea
+                loadWishes(); // Reload the list of wishes
+                alert(response.message);
+            },
+            error: function(xhr, status, error) {
+                alert('Terjadi kesalahan saat mengirim ucapan.');
+            }
+        });
+    });
+
+    // Function to load the existing wedding wishes
+    function loadWishes() {
+        $.ajax({
+            type: 'GET',
+            url: '/get-wedding-wishes', // Laravel route to get the wishes
+            success: function(response) {
+                var wishesList = $('#weddingWishesList');
+                wishesList.empty(); // Clear the list before appending new data
+
+                // Loop through the response data and append each wish to the list
+                response.wishes.forEach(function(wish, index) {
+                    var commentHtml = `
+                    <div class="comment-item aos-init aos-animate" id="comment${index}" data-aos="fade-up" data-aos-duration="1200">
+                        <div class="comment-head">
+                            <h3 class="comment-name">${wish.tamu_nama} - ${wish.tamu_organisasi} | <small class="comment-date">${wish.ucapan_date}</small></h3>
+
+                        </div>
+                        <div class="comment-body">
+                            <p class="comment-caption">${wish.ucapan_isiucapan}</p>
+                        </div>
+                    </div>`;
+
+                    wishesList.append(commentHtml);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Failed to load wishes:', error);
+            }
+        });
+    }
+});
+
+</script>
 <div class="alert" id="alert">
 <div class="alert-text"></div>
 <div class="alert-close fas fa-times"></div>

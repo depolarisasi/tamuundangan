@@ -3,181 +3,117 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Tamu;
+use App\Models\Ucapan;
+use Illuminate\Database\QueryException;
+use Carbon\Carbon;
 
 class UcapanController extends Controller
-{
-     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+{   // Fungsi untuk menampilkan semua data ucapan
     public function index()
     {
-        $article = article::join('users','users.id', '=','articles.penulis')
-            ->select('articles.*','users.name','users.kode_faskes')->get();
-
-            return view('article.semuaarticle',compact('article'));
+        $ucapan = Ucapan::all();
+        $count_ucapan_pria = Ucapan::where('ucapan_keluarga','ucapan Mempelai Pria')->count();
+        $count_ucapan_wanita = Ucapan::where('ucapan_keluarga','ucapan Mempelai Wanita')->count();
+        $count_ucapan_keluarga_pria = Ucapan::where('ucapan_keluarga','ucapan Keluarga Pria')->count();
+        $count_ucapan_keluarga_wanita = Ucapan::where('ucapan_keluarga','ucapan Keluarga Wanita')->count();
+        return view('ucapan.index')->with(compact('ucapan','count_ucapan_pria','count_ucapan_wanita','count_ucapan_keluarga_pria','count_ucapan_keluarga_wanita'));
     }
 
-
-    public function new(){
-        return view('article.articlebaru');
-
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
+    // Fungsi untuk menyimpan data ucapan baru
+    public function store(Request $request)
     {
-
-        $requestz = collect($request);
-        $requestz->put('penulis', Auth::user()->id);
-        $requestz->put('tanggal', date('Y-m-d'));
-        $requestz->put('slug', Str::slug(substr($request['blogjudul'], 0, 50).'-'.substr(md5(microtime()), rand(0, 26), 5)));
-
-        if ($request->file('thumb') == '') {
-            $requestz->put('foto', 'img/blogimg.png');
-            $requestz->put('thumbnailFoto', 'img/blog-thumb.png');
-        } else {
-            $file = $request->file('thumb');
-            $fileArray = ['image' => $file];
-            $rules = ['image' => 'mimes:jpeg,jpg,png,gif|required|max:1000000'];
-            $validator = Validator::make($fileArray, $rules);
-            if ($validator->fails()) {
-                // Redirect or return json to frontend with a helpful message to inform the user
-                // that the provided file was not an adequate type
-                $err = '<strong>File yang di upload bukanlah gambar, atau ukuran gambar kamu melebihi batas upload</strong>';
-
-
-                return redirect()->back();
-            } else {
-                // Store the File Now
-                // read image from temporary file
-                $fileName1 = time().'.'.$file->getClientOriginalName();
-                $fileName2 = time().'.thumb.'.$file->getClientOriginalName();
-                Image::make($file)->save('img/'.$fileName1);
-                Image::make($file)->fit(800, 350)->save('img/'.$fileName2);
-                $requestz->put('foto', 'img/'.$fileName1);
-                $requestz->put('thumbnailFoto', 'img/'.$fileName2);
-            }
-        }
-
-        $requestData = $requestz->all();
+        $request->validate([
+            'ucapan_nama' => 'required|string|max:255',
+            'ucapan_organisasi' => 'nullable|string|max:255',
+            'ucapan_keluarga' => 'nullable|string|max:255',
+            'ucapan_nohp' => 'required|string|max:15',
+        ]);
+        $form_data = collect($request->all());
 
         try {
-            article::create($requestData);
-        } catch (\Illuminate\Database\QueryException $e) {
-            return $e;
+            $ucapan = Ucapan::create($form_data->all());
+        alert('Sukses','Data Berhasil Ditambahkan', 'success');
+        return redirect('mempelai/ucapan');
+        } catch (QueryException $e) {
+        alert('Gagal','Data Gagal Ditambahkan', 'error');
+        return redirect('mempelai/ucapan');
         }
-
-        notify()->success('Berhasil! Post sudah diterbitkan!');
-
-        return redirect('artikel');
-
-
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function show(int $id)
+    // Fungsi untuk menampilkan data ucapan berdasarkan ID
+    public function edit($id)
     {
-        $detail = article::find($id);
-        return view('article.detailarticle')->with(compact('detail'));
-
+        $ucapan = Ucapan::findOrFail($id);
+        return view('ucapan.edit',compact('ucapan'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(int $id)
+    // Fungsi untuk memperbarui data ucapan berdasarkan ID
+    public function update(Request $request, $id)
     {
-        $detail = article::find($id);
-        return view('article.ubaharticle')->with(compact('detail'));
+        $ucapan = Ucapan::findOrFail($id);
 
-    }
+        $request->validate([
+            'ucapan_nama' => 'required|required|string|max:255',
+            'ucapan_organisasi' => 'nullable|string|max:255',
+            'ucapan_keluarga' => 'nullable|string|max:255',
+            'ucapan_nohp' => 'required|required|string|max:15',
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-
-    {
-        $edit = article::find($request->id);
-        $requestz = collect($request);
-        $requestz->put('slug', Str::slug(substr($request['blogjudul'], 0, 50).'-'.substr(md5(microtime()), rand(0, 26), 5)));
-
-        if ($request->file('thumb') == '') {
-            $requestz->put('foto', 'img/blogimg.png');
-            $requestz->put('thumbnailFoto', 'img/blog-thumb.png');
-        } else {
-            $file = $request->file('thumb');
-            $fileArray = ['image' => $file];
-            $rules = ['image' => 'mimes:jpeg,jpg,png,gif|required|max:1000000'];
-            $validator = Validator::make($fileArray, $rules);
-            if ($validator->fails()) {
-                // Redirect or return json to frontend with a helpful message to inform the user
-                // that the provided file was not an adequate type
-                $err = '<strong>File yang di upload bukanlah gambar, atau ukuran gambar kamu melebihi batas upload</strong>';
-
-                notify()->warning('Oh No ! File yang di upload bukanlah gambar, atau ukuran gambar anda melebihi batas upload', 'warning');
-
-                return redirect()->back();
-            } else {
-                // Store the File Now
-                // read image from temporary file
-                $fileName1 = time().'.'.$file->getClientOriginalName();
-                $fileName2 = time().'.thumb.'.$file->getClientOriginalName();
-                Image::make($file)->save('img/'.$fileName1);
-                Image::make($file)->fit(800, 350)->save('img/'.$fileName2);
-                $requestz->put('foto', 'img/'.$fileName1);
-                $requestz->put('thumbnailFoto', 'img/'.$fileName2);
-            }
-        }
-
-        $requestData = $requestz->all();
+        ]);
 
         try {
-           $edit->update($requestData);
-        } catch (\Illuminate\Database\QueryException $e) {
-            return $e;
+            $ucapan->update($request->all());
+            alert('Sukses','Data Berhasil Diubah', 'success');
+        return redirect('mempelai/ucapan');
+        } catch (QueryException $e) {
+            alert('Gagal','Data Gagal Diubah', 'error');
+            return redirect('mempelai/ucapan');
+        }
+    }
+
+    // Fungsi untuk menghapus data ucapan berdasarkan ID
+    public function destroy($id)
+    {
+        $ucapan = Ucapan::findOrFail($id);
+        try {
+            $ucapan->delete();
+        alert('Sukses','Data Berhasil Dihapus', 'success');
+        return redirect('mempelai/ucapan');
+        } catch (QueryException $e) {
+        alert('Gagal','Data Gagal Dihapus', 'error');
+        return redirect('mempelai/ucapan');
         }
 
-        notify()->success('Berhasil! Post sudah diubah!');
-
-        return redirect('artikel');
-
-
     }
 
+     // Method to handle form submission
+     public function submitWish(Request $request)
+     {
+         $request->validate([
+             'tamu_uniquecode' => 'required|string',
+             'wishes' => 'required|string|max:1000',
+         ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(int $id)
-    {
-        $article = article::find($id);
+         // Create the new wish in the database
+         Ucapan::create([
+             'ucapan_tamu' => $request->tamu_uniquecode,
+             'ucapan_isiucapan' => $request->wishes,
+             'ucapan_date' => Carbon::now(),
+         ]);
 
-        try{
-            $article->delete();
-        }catch(QE $e){  return $e; } //show db error message
+         // Return success response
+         return response()->json(['message' => 'Ucapan berhasil diterima!'], 200);
+     }
 
-        notify()->success('Berhasil ! Article berhasil dihapus');
-            return redirect('artikel');
-    }
+     // Method to get all wedding wishes
+     public function getWishes()
+     {
+         $wishes = Ucapan::join('tamu','tamu.tamu_uniquecode','=','ucapan.ucapan_tamu')
+         ->select('tamu.tamu_nama','tamu.tamu_organisasi','ucapan.*')
+         ->latest()->get(); // Get all wishes ordered by latest
+
+         // Return the list of wishes as JSON
+         return response()->json(['wishes' => $wishes]);
+     }
+
 }

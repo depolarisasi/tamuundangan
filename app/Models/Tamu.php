@@ -32,6 +32,7 @@ class Tamu extends Model
    'tamu_nohp',
    'tamu_uniquecode',
    'tamu_qr',
+   'tamu_kehadiran',
    'created_at',
    'updated_at'];
 }

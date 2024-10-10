@@ -160,7 +160,15 @@
                         <div class="d-flex flex-column"><span class="fw-medium">{{$tamu->tamu_nama}}</span> <small>{{$tamu->tamu_nohp}}</small></div></div></td>
                     <td>{{$tamu->tamu_organisasi}}</td>
                     <td>{{$tamu->tamu_keluarga}}</td>
-                    <td><span class="badge bg-label-success">Belum Menentukan</span></td>
+                    <td> @if($tamu->tamu_kehadiran == "Ya akan hadir")
+                        <span class="badge bg-label-success">Akan Hadir</span>
+                            @elseif ($tamu->tamu_kehadiran == "Tidak akan hadir")
+                            <span class="badge bg-label-danger">Tidak akan hadir</span>
+                            @elseif ($tamu->tamu_kehadiran == "Belum menentukan")
+                            <span class="badge bg-label-warning">Belum menentukan</span>
+                            @else
+                            <span class="badge bg-label-warning">{{$tamu->tamu_kehadiran}}</span>
+                        @endif</td>
                     <td>
                             <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                                 <button href="{{url('mempelai/tamu/delete/'.$tamu->tamu_id)}}" class="btn btn-outline-secondary waves-effect delete"><i class="ti ti-trash ti-md"></i></button>

@@ -13,14 +13,14 @@ class Ucapan extends Model
     *
     * @var string
     */
-   protected $table = 'tamu';
+   protected $table = 'ucapan';
 
    /**
     * The database primary key value.
     *
     * @var string
     */
-   protected $primaryKey = 'tamu_id';
+   protected $primaryKey = 'ucapan_id';
 
    /**
     * Attributes that should be mass-assignable.

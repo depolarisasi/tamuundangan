@@ -88,4 +88,24 @@ class TamuController extends Controller
 
         }
 
+        public function konfirmasi_kehadiran(Request $request){
+             // Validate the request data
+        $request->validate([
+            'kehadiran' => 'required|string|in:Ya akan hadir,Tidak akan hadir,Belum Menentukan',
+        ]);
+        $tamu = Tamu::where('tamu_uniquecode',$request->guestId)->first();
+
+        try {
+        $tamu->tamu_kehadiran = $request->kehadiran;
+        $tamu->update();
+        // Respond with success
+        return response()->json([
+            'message' => 'Konfirmasi kehadiran berhasil diterima.'
+        ], 200);
+        } catch (QueryException $e) {
+       return $request->guestId;
+        }
+
+        }
+
 }
