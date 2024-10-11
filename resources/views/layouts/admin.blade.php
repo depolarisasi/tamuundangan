@@ -82,7 +82,7 @@
           <ul class="menu-inner py-1">
 
             <li class="menu-item">
-              <a href="{{url('/')}}" class="menu-link">
+              <a href="{{url('/mempelai')}}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div>Dashboard</div>
               </a>

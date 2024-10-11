@@ -41,7 +41,9 @@ class PageController extends Controller
     }
 
     public function dashboard(){
-        return view('dashboard');
+        $tamu = Tamu::count();
+        $tamu_hadir = Tamu::where('tamu_kehadiran','Ya akan hadir')->count();
+        return view('dashboard',compact('tamu','tamu_hadir'));
     }
 
 

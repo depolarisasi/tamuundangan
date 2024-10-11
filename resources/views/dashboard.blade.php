@@ -11,7 +11,7 @@
                           <div class="content-left">
                             <span class="text-heading">Jumlah Tamu</span>
                             <div class="d-flex align-items-center my-1">
-                              <h4 class="mb-0 me-2">21,459</h4>
+                              <h4 class="mb-0 me-2">{{$tamu}}</h4>
                             </div>
                           </div>
                           <div class="avatar">
@@ -30,7 +30,7 @@
                           <div class="content-left">
                             <span class="text-heading">Tamu Terkonfirmasi Hadir</span>
                             <div class="d-flex align-items-center my-1">
-                              <h4 class="mb-0 me-2">4,567</h4>
+                              <h4 class="mb-0 me-2">{{$tamu_hadir}}</h4>
                             </div>
                           </div>
                           <div class="avatar">
@@ -48,14 +48,14 @@
                     <div class="card h-100">
                       <div class="card-header d-flex justify-content-between">
                         <div class="card-title mb-0">
-                          <h5 class="mb-1">Tamu Undangan Yang Hadir</h5>
+                          <h5 class="mb-1">Kehadiran Tamu</h5>
                         </div>
                       </div>
                       <div class="card-body">
                         <ul class="p-0 m-0">
                           <li class="mb-6 d-flex justify-content-between align-items-center">
                             <div class="d-flex justify-content-between w-100 flex-wrap">
-                              <h6 class="mb-0 ms-4"><strong>Emails</strong></h6>
+                              <h6 class="mb-0 ms-4"><strong>-</strong></h6>
                               <div class="d-flex">
                                 <p class="mb-0">09:32</p>
                               </div>
