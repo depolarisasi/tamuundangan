@@ -12,39 +12,19 @@ class UcapanController extends Controller
 {   // Fungsi untuk menampilkan semua data ucapan
     public function index()
     {
-        $ucapan = Ucapan::all();
-        $count_ucapan_pria = Ucapan::where('ucapan_keluarga','ucapan Mempelai Pria')->count();
-        $count_ucapan_wanita = Ucapan::where('ucapan_keluarga','ucapan Mempelai Wanita')->count();
-        $count_ucapan_keluarga_pria = Ucapan::where('ucapan_keluarga','ucapan Keluarga Pria')->count();
-        $count_ucapan_keluarga_wanita = Ucapan::where('ucapan_keluarga','ucapan Keluarga Wanita')->count();
-        return view('ucapan.index')->with(compact('ucapan','count_ucapan_pria','count_ucapan_wanita','count_ucapan_keluarga_pria','count_ucapan_keluarga_wanita'));
+        $ucapans = Ucapan::join('tamu','tamu.tamu_uniquecode','=','ucapan.ucapan_tamu')
+        ->select('tamu.tamu_nama','tamu.tamu_organisasi','tamu.tamu_uniquecode','ucapan.*')
+        ->get();
+        return view('ucapan.index')->with(compact('ucapans'));
     }
 
-    // Fungsi untuk menyimpan data ucapan baru
-    public function store(Request $request)
-    {
-        $request->validate([
-            'ucapan_nama' => 'required|string|max:255',
-            'ucapan_organisasi' => 'nullable|string|max:255',
-            'ucapan_keluarga' => 'nullable|string|max:255',
-            'ucapan_nohp' => 'required|string|max:15',
-        ]);
-        $form_data = collect($request->all());
-
-        try {
-            $ucapan = Ucapan::create($form_data->all());
-        alert('Sukses','Data Berhasil Ditambahkan', 'success');
-        return redirect('mempelai/ucapan');
-        } catch (QueryException $e) {
-        alert('Gagal','Data Gagal Ditambahkan', 'error');
-        return redirect('mempelai/ucapan');
-        }
-    }
 
     // Fungsi untuk menampilkan data ucapan berdasarkan ID
     public function edit($id)
     {
-        $ucapan = Ucapan::findOrFail($id);
+        $ucapan = Ucapan::join('tamu','tamu.tamu_uniquecode','=','ucapan.ucapan_tamu')
+        ->select('tamu.tamu_nama','tamu.tamu_organisasi','tamu.tamu_uniquecode','ucapan.*')
+        ->where('ucapan_id', $id)->first();
         return view('ucapan.edit',compact('ucapan'));
     }
 
@@ -54,10 +34,7 @@ class UcapanController extends Controller
         $ucapan = Ucapan::findOrFail($id);
 
         $request->validate([
-            'ucapan_nama' => 'required|required|string|max:255',
-            'ucapan_organisasi' => 'nullable|string|max:255',
-            'ucapan_keluarga' => 'nullable|string|max:255',
-            'ucapan_nohp' => 'required|required|string|max:15',
+            'ucapan_isiucapan' => 'required|string',
 
         ]);
 
