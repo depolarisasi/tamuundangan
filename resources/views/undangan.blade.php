@@ -32,50 +32,52 @@
             background-image: url('{{ asset('images/undanganheader.png') }}'); /* Replace with your background image URL */
             background-size: cover;
             background-position: center;
-            padding: 80px;
+            height: 250px;
         }
 
-        .card img {
-            width: 60%;
-            max-width: 250px;
-        }
-
-        .card h3 {
-            font-size: 20px;
-            margin: 20px 0 10px;
-            color: #333333;
-        }
-
-        .card p {
-            font-size: 14px;
-            color: #666666;
-            margin: 0 20px 20px;
-        }
-
-        .info {
+        .info-container {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin: 10px 20px;
-            padding: 10px;
-            border-top: 1px solid #eaeaea;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px 20px 20px;
         }
 
-        .info div {
+        .left-info {
+            width: 40%;
             text-align: center;
-            margin: 10px 0;
-            flex: 0 0 50%; /* Full width by default */
         }
 
-        .info div p {
-            margin: 5px 0 0;
+        .right-info {
+            width: 55%;
+            text-align: left;
+        }
+
+        .qr-code {
+            margin-bottom: 10px;
+        }
+
+        .qr-code img {
+            width: 150px;
+        }
+
+        .details {
+            margin: 20px 0;
+        }
+
+        .details h3 {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .details p {
             font-size: 14px;
-            color: #666666;
+            color: #666;
+            margin: 0;
         }
 
-        .info div span {
+        .details .label {
             font-weight: bold;
-            color: #333333;
+            color: #333;
         }
 
         .button {
@@ -103,75 +105,24 @@
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .card {
-                width: 90%;
+            .info-container {
+                flex-direction: column;
+                align-items: center;
             }
 
-            .card .image-container {
-                padding: 60px;
-            }
-
-            .card h3 {
-                font-size: 18px;
-            }
-
-            .card p {
-                font-size: 14px;
-                margin: 0 10px 15px;
-            }
-
-            .info div p {
-                font-size: 14px;
-            }
-
-            .info div {
-                flex: 0 0 50%; /* Each item takes up 50% width */
-            }
-
-            .button {
-                padding: 8px 16px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .card {
+            .left-info, .right-info {
                 width: 100%;
-                border-radius: 8px;
+                text-align: center;
             }
 
-            .card .image-container {
-                padding: 40px;
+            .qr-code img {
+                width: 150px;
             }
 
-            .card img {
-                width: 80%;
-                max-width: 200px;
-            }
-
-            .card h3 {
-                font-size: 16px;
-            }
-
-            .card p {
-                font-size: 14px;
-            }
-
-            .info {
-                flex-direction: row; /* Ensure items stay in row */
-            }
-
-            .info div {
-                flex: 0 0 50%; /* Each item takes up 50% width */
-            }
-
-            .info div p {
-                font-size: 14px;
-            }
-
-            .button {
-                padding: 6px 12px;
-                font-size: 14px;
+            .p2 {
+                padding: 10px;
+                margin: 10px;
+                margin-bottom : 0px;
             }
         }
     </style>
@@ -181,17 +132,39 @@
     <div class="card" id="invitationCard">
         <div class="image-container">
         </div>
-        <br>
-        @if($nama_tamu)
-        <p><strong>Kepada, {{$nama_tamu->tamu_nama}}</strong></p>
-        @else
-        @endif
-        {!! $filledTemplate !!}
-        @if($nama_tamu)
-        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(256)->generate(url('undangan/'.$nama_tamu->tamu_uniquecode))) !!} " alt="QR Code">
-        @else
-        @endif
 
+
+        <p class="label p2">  @if($nama_tamu)<strong>{{$nama_tamu->tamu_nama}}</strong>,
+            @endif anda diundang pada acara spesial kami</p>
+        <div class="info-container">
+
+            <div class="right-info">
+                <div class="details">
+                    <h3>{{config('settings.wedding_name')}}</h3>
+                    <p class="label">Resepsi Pernikahan</p>
+                    <p><span class="label">Date:</span> {{config('settings.resepsi_day')}}, {{config('settings.wedding_date')}}</p>
+                    <p><span class="label">Time:</span> {{config('settings.resepsi_time')}}</p>
+                    <p><span class="label">Location:</span> {{config('settings.resepsi_place')}}</p>
+                    <p>{{config('settings.resepsi_address')}}</p>
+                </div>
+            </div>
+            <div class="left-info">
+                <div class="qr-code">
+                    @if($nama_tamu)
+                    <p><small>Tunjukan QR Code ini Kepada Penerima Tamu</small></p>
+                    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(150)->generate(url('undangan/'.$nama_tamu->tamu_uniquecode))) !!}" alt="QR Code">
+
+                </div>
+                <p style="margin-bottom: 3px;"><strong>{{$nama_tamu->tamu_nama}}</strong></p>
+                <p style="margin-top: 3px;"><strong>{{$nama_tamu->tamu_uniquecode}}</strong></p>
+                @else
+                @endif
+            </div>
+        </div>
+        @if($nama_tamu)
+        <p class="label">Informasi Lebih Lanjut : </p>
+        <p><a href="{{url('/?guest='.$nama_tamu->tamu_uniquecode)}}">edwardnindita.unitedby.love/?guest={{$nama_tamu->tamu_uniquecode}}</a></p>
+        @endif
     </div>
 
     <button id="downloadBtn" class="button">Download Undangan</button>

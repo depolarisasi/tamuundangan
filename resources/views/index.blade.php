@@ -24,7 +24,6 @@
 <meta property="twitter:title" content="{{config('settings.wedding_name')}}">
 <meta property="twitter:description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.wedding_day')}}, {{config('settings.resepsi_date')}}">
 <meta property="twitter:image" content="{{asset('images/og-image.png')}}">
-@livewireStyles
 @if($tamu)
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endif
@@ -388,6 +387,21 @@ Tambah ke Kalender </a>
 <p class="info-text">Harap konfirmasikan kehadiran Anda sebelum,</p>
 <p class="info-date" data-aos="fade-up" data-aos-duration="1000">{{config('settings.resepsi_confirmation')}}</p> </div>
 </div>
+<section class="einvitation-wrap">
+    <div class="einvitation" data-aos="zoom-out" data-aos-duration="1200">
+    <div class="einvitation-head">
+    <p class="einvitation-title" data-aos="zoom-in" data-aos-duration="1000">E-Invitation</p>
+    <p class="einvitation-event" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">{{$tamu->tamu_nama}}</p>
+    </div>
+    <div class="einvitation-body" style="text-align: center;">
+        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(150)->generate(url('undangan/'.$tamu->tamu_uniquecode))) !!}" alt="QR Code">
+    </div>
+    <div class="add-to-calendar-wrap" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1100">
+    <a class="add-to-calendar" href="{{url('undangan/'.$tamu->tamu_uniquecode)}}" target="_blank" >
+    Download E-Invitation </a>
+    </div>
+    </div>
+    </section>
 <div class="rsvp-body">
     <form id="confirmationForm">
     <input type="hidden" name="guestId" id="guestId" value="{{$tamu->tamu_uniquecode}}">
@@ -403,6 +417,8 @@ Tambah ke Kalender </a>
 </div>
 </div>
 </section>
+
+
 @endif
 
 <section class="gallery-wrap">
@@ -779,9 +795,10 @@ Tambah ke Kalender </a>
 </div>
 <div class="person-info">
 <div class="person-details">
-<p></p>
 <h3 class="person-name large">{{$tamu->tamu_nama}} - {{$tamu->tamu_organisasi}}</h3>
 <p>Anda diundang pada pesta pernikahan kami</p>
+<p> </p>
+<a href="{{url('undangan/'.$tamu->tamu_uniquecode)}}">Unduh E-Invitation Anda Disini</a>
 </div>
 <div>
 <svg width="267" height="122" viewBox="0 0 267 122" xmlns="http://www.w3.org/2000/svg" class="person-envelope-open">
@@ -948,8 +965,7 @@ $(document).ready(function() {
                     var commentHtml = `
                     <div class="comment-item aos-init aos-animate" id="comment${index}" data-aos="fade-up" data-aos-duration="1200">
                         <div class="comment-head">
-                            <h3 class="comment-name">${wish.tamu_nama} - ${wish.tamu_organisasi} | <small class="comment-date">${wish.ucapan_date}</small></h3>
-
+                            <h3 class="comment-name">${wish.tamu_nama} - ${wish.tamu_organisasi} <small class="comment-date">${wish.ucapan_date}</small></h3>
                         </div>
                         <div class="comment-body">
                             <p class="comment-caption">${wish.ucapan_isiucapan}</p>
