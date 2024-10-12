@@ -13,7 +13,7 @@
           <h5 class="card-title mb-0">Setting</h5>
          </div>
         <div class="card-body">
-            <form method="post" action="{{url('setting/'.$setting->setting_id)}}">
+            <form method="post" action="{{url('mempelai/setting/'.$setting->setting_id)}}">
                 @csrf
                 @method('PUT')
             <div class="col mb-4">

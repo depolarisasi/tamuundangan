@@ -28,7 +28,7 @@
                         <div class="d-flex flex-column"><span class="fw-medium">{{$settings->setting_name}}</span></div></div></td>
                     <td><span class="text-truncate d-flex align-items-center text-heading">{{substr($settings->setting_value,0,50)}}</span></td>
                     <td><div class="d-flex align-items-center">
-                        <a href="{{url('setting/'.$settings->setting_id)}}" class="btn btn-icon btn-text-primary rounded-pill"><i class="ti ti-pencil ti-md"></i></a>
+                        <a href="{{url('/mempelai/setting/'.$settings->setting_id)}}" class="btn btn-icon btn-text-primary rounded-pill"><i class="ti ti-pencil ti-md"></i></a>
                         </div>
                     </td>
                 </tr>
