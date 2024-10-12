@@ -35,7 +35,7 @@ class SettingController extends Controller
         try {
             $setting->update($request->all());
             alert('Sukses','Data Berhasil Diubah', 'success');
-            return redirect('setting');
+            return redirect('mempelai/setting');
         } catch (QueryException $e) {
             alert('Gagal','Data Gagal Diubah', 'error');
         }
