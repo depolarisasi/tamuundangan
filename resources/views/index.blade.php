@@ -557,14 +557,14 @@ Tambah ke Kalender </a>
 <div class="bank-item">
     <div class="bank-detail">
     <small class="bank-account-name-label">Nama Bank</small>
-    <h3 class="bank-name">Mandiri {{config('settings.hadiah_bank1')}}</h3>
+    <h3 class="bank-name">{{config('settings.hadiah_bank1')}}</h3>
     <div>
     <small class="bank-account-number-label">No. Rekening</small>
-    <h4 class="bank-account-number">123123213213{{config('settings.hadiah_norek1')}}</h4>
+    <h4 class="bank-account-number">{{config('settings.hadiah_norek1')}}</h4>
     </div>
     <div>
     <small class="bank-account-name-label">Pemilik Rekening</small>
-    <h4 class="bank-account-name">BABABABA{{config('settings.hadiah_rek1')}}</h4>
+    <h4 class="bank-account-name">{{config('settings.hadiah_rek1')}}</h4>
     </div>
     </div>
     </div>
@@ -572,7 +572,7 @@ Tambah ke Kalender </a>
     <div class="bank-item">
     <div class="bank-detail">
         <small class="bank-account-name-label">Nama Bank</small>
-    <h3 class="bank-name">BCA {{config('settings.hadiah_bank2')}}</h3>
+    <h3 class="bank-name">{{config('settings.hadiah_bank2')}}</h3>
     <div>
     <small class="bank-account-number-label">No. Rekening</small>
     <h4 class="bank-account-number">{{config('settings.hadiah_norek2')}}</h4>
