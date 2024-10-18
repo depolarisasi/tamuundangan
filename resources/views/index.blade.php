@@ -204,7 +204,7 @@
 </div>
 </div>
 <div class="foot">
-<p class="top-text" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="150">The Wedding of</p> <h1 class="prime-title" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">{{config('settings.wedding_name')}}</h1> <p class="bottom-text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">#{{config('settings.mempelai_wanita_short')}}And{{config('settings.mempelai_pria_short')}}</p>
+<p class="top-text" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="150">The Wedding of</p> <h1 class="prime-title" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">Nindita & Edward</h1> <p class="bottom-text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">#{{config('settings.mempelai_wanita_short')}}And{{config('settings.mempelai_pria_short')}}</p>
 </div>
 </div>
 </section>

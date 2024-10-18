@@ -17,7 +17,7 @@ body.helga {
     --body-text-family: 'Playfair Display', serif;
     --body-text-style: normal;
     --body-text-weight: 400;
-    --body-text-size: calc(4.1vw - .0064px);
+    --body-text-size: calc(5vw - .0064px);
     --body-text-lettercase: none;
 
     /* Font Size Extra */
