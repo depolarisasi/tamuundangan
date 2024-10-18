@@ -809,7 +809,6 @@ Tambah ke Kalender </a>
 <div class="music-box auto" id="music-box"></div>
 </section>
 
-@livewireScripts
 </body>
 <script>
 
