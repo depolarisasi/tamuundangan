@@ -438,12 +438,6 @@ Tambah ke Kalender </a>
 <a href="foto-prewedd/7.jpg" class data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="100">
 <img src="foto-prewedd/7.jpg">
 </a>
-<a href="foto-prewedd/8.jpg" class data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="200">
-<img src="foto-prewedd/8.jpg">
-</a>
-<a href="foto-prewedd/9.jpg" class data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="300">
-<img src="foto-prewedd/9.jpg">
-</a>
 <a href="foto-prewedd/10.jpg" class data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="400">
 <img src="foto-prewedd/10.jpg">
 </a>
@@ -459,12 +453,6 @@ Tambah ke Kalender </a>
 <a href="foto-prewedd/14.jpg" class data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="800">
 <img src="foto-prewedd/14.jpg">
 </a>
-<a href="foto-prewedd/1.jpg" class data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="900">
-<img src="foto-prewedd/1.jpg">
-</a>
-<a href="foto-prewedd/2.jpg" class data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="1000">
-<img src="foto-prewedd/2.jpg">
-</a>
 <a href="foto-prewedd/3.jpg" class data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="1100">
 <img src="foto-prewedd/3.jpg">
 </a>
@@ -474,6 +462,9 @@ Tambah ke Kalender </a>
 <a href="foto-prewedd/6.jpg" class data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="1300">
 <img src="foto-prewedd/6.jpg">
 </a>
+<a href="foto-prewedd/5.jpg" class data-aos="fade-up-left" data-aos-duration="1000" data-aos-delay="1300">
+    <img src="foto-prewedd/5.jpg">
+    </a>
 </div>
 </div>
 </div>
@@ -824,7 +815,7 @@ Tambah ke Kalender </a>
 
     // Music
     var MUSIC = {
-        'url': "{{asset('wedding/lagu.mp3')}}",
+        'url': "{{asset('wedding/lagu-wedding.mp3')}}",
         'box': '#music-box'
     };
 
