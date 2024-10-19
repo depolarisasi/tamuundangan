@@ -277,7 +277,7 @@
 </div>
 
 <div class="couple-details">
-        <p class="couple-description" data-aos="fade-up" data-aos-duration="1000">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada putra-putri kami. Atas kehadiran dan doa restunya kami ucapkan terima kasih.
+        <p class="couple-description" style="margin: 20px !important;" data-aos="fade-up" data-aos-duration="1000">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada putra-putri kami. Atas kehadiran dan doa restunya kami ucapkan terima kasih.
         </p>
     </br>
         <p class="couple-description" data-aos="fade-up" data-aos-duration="1000">Kami yang berbahagia,</p>
