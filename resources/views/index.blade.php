@@ -763,7 +763,7 @@ Tambah ke Kalender </a>
 </div>
 <div class="footnote">
 <p class="top-text" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">The Wedding of</p>
-<h2 class="footnote-title" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">{{config('settings.wedding_name')}}</h2>
+<h2 class="footnote-title" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">Nindita & Edward</h2>
 <p class="date" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">{{config('settings.resepsi_date')}}</p>
 <p class="bottom-text" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">#{{config('settings.mempelai_wanita_short')}}And{{config('settings.mempelai_pria_short')}}</p> </div>
 </section>
