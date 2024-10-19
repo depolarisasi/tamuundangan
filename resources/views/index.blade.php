@@ -283,7 +283,7 @@
         <p class="couple-description" data-aos="fade-up" data-aos-duration="1000">Kami yang berbahagia,</p>
         <div class="container">
             <div class="column">
-                <p class="couple-description" >Kel. Bapak Nono Sudino. S.H</p>
+                <p class="couple-description" >Kel. Bapak Nono Sudiono. S.H</p>
                 <p class="couple-description" >Ibu Dra Vini Noviani</p>
             </div>
             <div class="column">
