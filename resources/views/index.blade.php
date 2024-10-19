@@ -218,7 +218,9 @@
 <section class="couple-wrap">
 <div class="couple">
 <div class="couple-head">
-<h1 class="couple-title" data-aos="zoom-in" data-aos-duration="1000">Assalamu&#039;alaikum Warahmatullahi Wabarakatuh</h1> <p class="couple-description" data-aos="fade-up" data-aos-duration="1000">Dengan segala kerendahan hati dan dengan ucapan syukur atas rahmat Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir di acara pernikahan kami.</p> </div>
+<h1 class="couple-title" data-aos="zoom-in" data-aos-duration="1000">Assalamu&#039;alaikum Warahmatullahi Wabarakatuh</h1>
+<p class="couple-description" data-aos="fade-up" data-aos-duration="1000">Maha Suci Allah yang telah menciptakan Mahluk-Nya berpasang-pasangan.
+    Ya Allah, dengan Rahmat dan Ridho-Mu perkenankanlah tautan cinta buah hati kami</p> </div>
 <div class="couple-body  bride-first   show-picture  ">
 <div class="couple-info groom">
 <div class="couple-preview-wrap">
@@ -236,7 +238,7 @@
 </div>
 </div>
 <div class="couple-details">
-<h2 class="couple-name" data-aos="fade-up" data-aos-duration="1000">{{config('settings.mempelai_pria_long')}}</h1> <p class="couple-parents" data-aos="fade-up" data-aos-duration="1000">Putra Dari Bapak {{config('settings.ayah_pria')}} dan Ibu {{config('settings.ibu_pria')}}</p> <div class="couple-link-wrap" data-aos="fade-up" data-aos-duration="1000">
+<h2 class="couple-name" data-aos="fade-up" data-aos-duration="1000">{{config('settings.mempelai_pria_long')}}</h1> <div class="couple-link-wrap" data-aos="fade-up" data-aos-duration="1000">
 <a href="https://www.instagram.com/{{config('settings.username_ig_pria')}}" target="_blank" class="couple-link"><i class="fab fa-instagram"></i> @ {{config('settings.username_ig_pria')}}</a>
 </div> </div>
 </div>
@@ -261,15 +263,35 @@
 </div>
 </div>
 <div class="couple-details">
-<h2 class="couple-name" data-aos="fade-up" data-aos-duration="1000">{{config('settings.mempelai_wanita_long')}}</h2> <p class="couple-parents" data-aos="fade-up" data-aos-duration="1000">Putri dari Bapak {{config('settings.ayah_wanita')}} dan Ibu {{config('settings.ibu_wanita')}}</p> <div class="couple-link-wrap" data-aos="fade-up" data-aos-duration="1000">
+<h2 class="couple-name" data-aos="fade-up" data-aos-duration="1000">{{config('settings.mempelai_wanita_long')}}</h2> <div class="couple-link-wrap" data-aos="fade-up" data-aos-duration="1000">
 <a href="https://www.instagram.com/{{config('settings.username_ig_wanita')}}" target="_blank" class="couple-link"><i class="fab fa-instagram"></i> @ {{config('settings.username_ig_wanita')}}</a>
-</div> </div>
 </div>
+</div>
+</div>
+
+    </div>
 </div>
 </div>
 <div class="texture-outer bottom" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
 <div class="couple-leaves"></div>
 </div>
+
+<div class="couple-details">
+        <p class="couple-description" data-aos="fade-up" data-aos-duration="1000">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada putra-putri kami. Atas kehadiran dan doa restunya kami ucapkan terima kasih.
+        </p>
+    </br>
+        <p class="couple-description" data-aos="fade-up" data-aos-duration="1000">Kami yang berbahagia,</p>
+        <div class="container">
+            <div class="column">
+                <p class="couple-description" >Kel. Bapak Nono Sudino. S.H</p>
+                <p class="couple-description" >Ibu Dra Vini Noviani</p>
+            </div>
+            <div class="column">
+                <p class="couple-description" >Kel. Bapak Dadang Supriyadi</p>
+                <p class="couple-description" >Ibu Imas Masunah</p>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="save-date-wrap">

@@ -12190,3 +12190,26 @@ section.person .person-envelope-open .cls-2 {
     font-size: 20px !important;
     margin-bottom: 10px
 }
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    flex-wrap: wrap; /* Allows the columns to wrap on smaller screens */
+}
+
+.column {
+    width: calc(50% - 40px); /* Adjust for margin */
+}
+
+
+/* Adjust margins for smaller screens */
+@media (max-width: 400px) {
+    .container {
+        margin: 20px;
+    }
+
+    .column {
+        width: calc(50% - 20px); /* Adjust for smaller margins */
+    }
+}
