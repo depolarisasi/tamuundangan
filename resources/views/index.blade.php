@@ -10,24 +10,21 @@
 
 <meta name="title" content="{{config('settings.wedding_name')}}">
 <meta name="description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.resepsi_day')}}, {{config('settings.resepsi_date')}}">
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content="https://edwardnindita.unitedby.love/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nindita & Edward Wedding">
+<meta property="og:description" content="Anda diundang pada acara pesta Nindita & Edward Wedding - Sabtu, 09 November 2024">
+<meta property="og:image" content="http://edwardnindita.unitedby.love/images/og-image.png">
 
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="unitedby.love">
-<meta property="og:url" content="https://edwardnindita.unitedby.love" />
-<meta property="og:title" content="Nindita & Edward Wedding" />
-<meta property="og:description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.resepsi_day')}}, {{config('settings.resepsi_date')}}" />
-<meta property="og:image" content="http://edwardnindita.unitedby.love/images/og-image.png" />
-<meta property="og:image:secure_url" content="https://edwardnindita.unitedby.love/images/og-image.png" />
-<meta property="og:locale" content="in_ID">
-<meta property="og:logo" content="https://edwardnindita.unitedby.love/images/og-image.png" />
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:domain" content="edwardnindita.unitedby.love">
+<meta property="twitter:url" content="https://edwardnindita.unitedby.love/">
+<meta name="twitter:title" content="Nindita & Edward Wedding">
+<meta name="twitter:description" content="Anda diundang pada acara pesta Nindita & Edward Wedding - Sabtu, 09 November 2024">
+<meta name="twitter:image" content="http://edwardnindita.unitedby.love/images/og-image.png">
 
-
-
-<meta property="twitter:card" content="images/og-image.png')}}">
-<meta property="twitter:url" content="https://edwardnindita.unitedby.love">
-<meta property="twitter:title" content="Nindita & Edward Wedding">
-<meta property="twitter:description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.resepsi_day')}}, {{config('settings.resepsi_date')}}">
-<meta property="twitter:image" content="https://edwardnindita.unitedby.love/images/og-image.png">
 @if($tamu)
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endif
