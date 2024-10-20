@@ -18,6 +18,9 @@
 <meta property="og:description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.resepsi_day')}}, {{config('settings.resepsi_date')}}" />
 <meta property="og:image" content="{{asset('images/og-image.png')}}" />
 <meta property="og:locale" content="in_ID">
+<meta property="og:logo" content="{{asset('images/og-image.png')}}" />
+
+
 
 <meta property="twitter:card" content="images/og-image.png')}}">
 <meta property="twitter:url" content="{{url('/')}}">
