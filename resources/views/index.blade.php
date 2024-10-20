@@ -16,7 +16,8 @@
 <meta property="og:url" content="https://edwardnindita.unitedby.love" />
 <meta property="og:title" content="Nindita & Edward Wedding" />
 <meta property="og:description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.resepsi_day')}}, {{config('settings.resepsi_date')}}" />
-<meta property="og:image" content="https://edwardnindita.unitedby.love/images/og-image.png" />
+<meta property="og:image" content="http://edwardnindita.unitedby.love/images/og-image.png" />
+<meta property="og:image:secure_url" content="https://edwardnindita.unitedby.love/images/og-image.png" />
 <meta property="og:locale" content="in_ID">
 <meta property="og:logo" content="https://edwardnindita.unitedby.love/images/og-image.png" />
 
