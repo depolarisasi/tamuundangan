@@ -9,20 +9,20 @@
 <meta name="format-detection" content="telephone=no">
 
 <meta name="title" content="{{config('settings.wedding_name')}}">
-<meta name="description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.wedding_day')}}, {{config('settings.resepsi_date')}}">
+<meta name="description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.resepsi_day')}}, {{config('settings.resepsi_date')}}">
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="unitedby.love">
 <meta property="og:url" content="{{url('/')}}" />
 <meta property="og:title" content="{{config('settings.wedding_name')}}" />
-<meta property="og:description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.wedding_day')}}, {{config('settings.resepsi_date')}}" />
-<meta property="og:image" content="{{asset('images/og-image.png"')}}" />
+<meta property="og:description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.resepsi_day')}}, {{config('settings.resepsi_date')}}" />
+<meta property="og:image" content="{{asset('images/og-image.png')}}" />
 <meta property="og:locale" content="in_ID">
 
 <meta property="twitter:card" content="images/og-image.png')}}">
 <meta property="twitter:url" content="{{url('/')}}">
 <meta property="twitter:title" content="{{config('settings.wedding_name')}}">
-<meta property="twitter:description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.wedding_day')}}, {{config('settings.resepsi_date')}}">
+<meta property="twitter:description" content="Anda diundang pada acara pesta {{config('settings.wedding_name')}} - {{config('settings.resepsi_day')}}, {{config('settings.resepsi_date')}}">
 <meta property="twitter:image" content="{{asset('images/og-image.png')}}">
 @if($tamu)
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -327,7 +327,7 @@
 </div>
 </div>
 <div class="add-to-calendar-wrap" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1100">
-<a class="add-to-calendar" href="https://www.google.com/calendar/render?action=TEMPLATE&amp;text={{config('settings.mempelai_wanita_short')}}+%26+{{config('settings.mempelai_pria_short')}}+Wedding&amp;dates=20241109T110000/20241109T140000&amp;location=Hotel+Sari+Ater+Kamboti+%7C+Jl.+Lemahnendeut+No.7%2C+Sukawarna%2C+Kec.+Sukajadi%2C+Kota+Bandung%2C+Jawa+Barat+40164%2C+Indonesia+%7C+Kota+Bandung&amp;details=Anda+diundang+pada+acara+pesta+pernikahan+kami+%7C+Pernikahan+{{config('settings.mempelai_wanita_short')}}+%26+{{config('settings.mempelai_pria_short')}}+{{config('settings.wedding_day')}}%2C+09+November+2024" target="_blank" rel="nofollow" id="addToCalendar">
+<a class="add-to-calendar" href="https://www.google.com/calendar/render?action=TEMPLATE&amp;text={{config('settings.mempelai_wanita_short')}}+%26+{{config('settings.mempelai_pria_short')}}+Wedding&amp;dates=20241109T110000/20241109T140000&amp;location=Hotel+Sari+Ater+Kamboti+%7C+Jl.+Lemahnendeut+No.7%2C+Sukawarna%2C+Kec.+Sukajadi%2C+Kota+Bandung%2C+Jawa+Barat+40164%2C+Indonesia+%7C+Kota+Bandung&amp;details=Anda+diundang+pada+acara+pesta+pernikahan+kami+%7C+Pernikahan+{{config('settings.mempelai_wanita_short')}}+%26+{{config('settings.mempelai_pria_short')}}+{{config('settings.resepsi_day')}}%2C+09+November+2024" target="_blank" rel="nofollow" id="addToCalendar">
 Tambah ke Kalender </a>
 </div>
 </div>
